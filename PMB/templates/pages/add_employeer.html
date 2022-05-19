@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    .add_employeer{
+        display: grid;
+        grid-template-columns: 30% 1fr;
+        margin: 20px 10px;
+        grid-template-areas: "employ form";
+        
+    }
+
+    .employeers{
+        margin: 10px auto;
+        width: 100%;
+        height: 100vh;
+        background-color: gray;
+        grid-area: employ;
+        border-radius: 20px 0 0 20px;
+        box-shadow: 5px 5px 20px black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-width: 311.60px;
+    }
+
+    .profile > img{
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        margin-top: 30px;
+    }
+
+    .profile{
+        text-align: center;
+    }
+
+    form, .employeers{
+        margin: 0 auto;
+        overflow: auto;
+        text-align: center;
+    }
+
+    .employeers::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+    
+}
+
+    .employeers::-webkit-scrollbar
+    {
+        
+        width: 10px;
+        background-color: #F5F5F5;
+    }
+
+    .employeers::-webkit-scrollbar-thumb
+    {
+        background-color: #000000;
+        border: 2px solid #555555;
+        border-radius: 1px;
+    }
+    form > button{
+        margin: 20px 0 0 0;
+    }
+</style>
+<body>
+    <div class="add_employeer">
+        
+        <div class="employeers">
+            {% for i in employeer%}
+            
+            <div class="profile">
+                <img src="" alt="">
+                <h3>{{i.name}}</h3>
+                <h1>{{i.photo.url}}</h1>
+            </div>
+            {% endfor %}
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">{% csrf_token %}
+            <p>Nome</p>
+            <input type="text" name="name">
+            <p>Telefone</p>
+            <input type="number" name="phone" maxlength="11">
+            <p>Foto</p>
+            <input type="file" name="image">
+            <br>
+            <button type="submit">Cadastrar</button>
+        </form>
+    </div>
+</body>
+</html>
