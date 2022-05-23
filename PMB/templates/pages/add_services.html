@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add_Services</title>
+    <style>
+        form{
+            width: 300px;
+            margin: 100px auto;
+            text-align: center;
+        }
+        form > select{
+            width: 80%;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST">{% csrf_token %}
+        <p>Nome</p>
+        <input type="text" name="name">
+        <p>Técnicas</p>
+        <textarea name="technique" cols="30" rows="10"></textarea>
+        <p>Produtos</p>
+        <input type="text" name="product">
+        <p>Profissionais</p>        
+        <select name="professionals" multiple>
+            {% for i in employeers%}
+                <option value="{{i.name}}">{{i.name}}</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <button type="submit">Adicionar</button>
+    </form>
+</body>
+</html>
