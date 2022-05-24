@@ -3,6 +3,7 @@ from unicodedata import name
 from django.shortcuts import render, redirect
 from .models import Register_Employeers, Register_Services, Register_Time, Schedule
 
+
 def agenda(request):
     employeers = Register_Employeers.objects.all()
     services = Register_Services.objects.all()
@@ -23,20 +24,22 @@ def add_employeer(request):
         employeer = Register_Employeers.objects.all()
         return render(request, 'pages/add_employeer.html',{'employeer':employeer})
 
-def add_service(request):    
-    #t = Register_Services.objects.get(user_id=1)
-    #print(t.professionals.all())
+def add_service(request): 
     if request.method == "POST":
         employeers = Register_Employeers.objects.all()
         name = request.POST.get('name')
         technique = request.POST.get('technique')
         products = request.POST.get('product')
         professionals = request.POST.getlist('professionals')
+        
+        add = Register_Services(user_id=request.user.id, name=name, technique=technique, products=products)
+        add.save()
+        
         for i in professionals:
-            professional = Register_Employeers.objects.get(name=i)
-            add = Register_Services.objects.create(user_id=request.user.id, name=name, technique=technique,
-                                               products=products, professionals=professional)
-            add.save()
+            a1 = Register_Employeers.objects.get(name=i)
+            add.professionals.add(a1)
+        
+        
         return redirect('add_service')
     else:
         employeers = Register_Employeers.objects.all()
