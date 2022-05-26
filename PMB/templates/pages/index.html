@@ -1,32 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .login{
+            display: flex;
+            justify-content: center;
+        }
+
+        .login > a{
+            transition: .3s;
+            margin:30px;
+            font-size: 1.4rem;
+            text-decoration: none;
+            background-color: black;
+            color: white;
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+
+        .login > a:hover{
+            opacity: .7;
+        }
+    </style>
 </head>
 <body>
-    <form method="post">{% csrf_token %}
-        <p>Serviço</p>
-        <select name="services">
-            {% for i in employeers%}
-                <option value="{{i.name}}">{{i.name}}</option>
-            {% endfor %}
-        </select>
-        <p>Funcionário</p>
-        <select name="employers">
-            {% for i in services%}
-                <option value="{{i.name}}">{{i.name}}</option>
-            {% endfor %}    
-        </select>
-        <p>Horário</p>
-        <select name="times">
-            {% for i in time%}
-                <option value="{{i.date}}">{{i.date}}</option>]
-            {% endfor %}    
-        </select>
-        <button type="submit">Disponibilizar Horários</button>
-    </form>
+    <h1 align="center">Marca Beleza</h1>
+    <br>
+    <h2 align="center">O que deseja?</h2>
+    <div class="login">
+        <a href="">Buscar Serviços</a>
+        <a href="{% url 'login_company'%}">Oferecer Serviços</a>
+    </div>
 </body>
 </html>

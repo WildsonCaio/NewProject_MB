@@ -26,7 +26,6 @@ class Register_Time(models.Model):
     def __str__(self):
         return self.date
 
-
 class Schedule(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE) 
     employeers = models.ForeignKey(Register_Employeers, on_delete=models.CASCADE)        
